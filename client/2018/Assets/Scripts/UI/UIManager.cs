@@ -1,24 +1,9 @@
-﻿/***
- * 
- *    Title: "SUIFW" UI框架项目
- *           主题： UI管理器  
- *    Description: 
- *           功能： 是整个UI框架的核心，用户程序通过本脚本，来实现框架绝大多数的功能实现。
- *                  
- *    Date: 2017
- *    Version: 0.1版本
- *    Modify Recoder: 
- *    
- * 
- *    软件开发原则：
- *    1： “高内聚，低耦合”。
- *    2： 方法的“单一职责”
- *     
- */
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Tool;
+using Define;
 
 namespace UIForm
 {
@@ -478,6 +463,11 @@ namespace UIForm
         /// </summary>
 	    private void InitUIFormsPathData()
         {
+            Dictionary<string, string> configMgr = ToolUtils.getConfigByJson(UIDefine.UI_PATH_UIFORMS_CONFIG_INFO);
+            if(configMgr != null)
+            {
+                _DicFormsPaths = configMgr;
+            }
            /* IConfigManager configMgr = new ConfigManagerByJson(UIDefine.UI_PATH_UIFORMS_CONFIG_INFO);
             if (configMgr != null)
             {

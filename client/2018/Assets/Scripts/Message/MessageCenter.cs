@@ -44,6 +44,7 @@ static internal class MessageCenter
     //Message handlers that should never be removed, regardless of calling Cleanup
     static public List<string> permanentMessages = new List<string>();
     #endregion
+
     #region Helper methods
     //Marks a certain message as permanent.
     static public void MarkAsPermanent(string eventType)

@@ -79,6 +79,69 @@ namespace UIForm
             }
         }
 
+        /// <summary>
+        /// 打开UI窗体
+        /// </summary>
+        /// <param name="uiFormName"></param>
+        protected void OpenUIForm(string uiFormName)
+        {
+            UIManager.GetInstance().ShowUIForms(uiFormName);
+        }
+
+        /// <summary>
+        /// 关闭当前UI窗体
+        /// </summary>
+        protected void CloseUIForm()
+        {
+            string strUIFromName = string.Empty;            //处理后的UIFrom 名称
+            int intPosition = -1;
+
+            strUIFromName = GetType().ToString();             //命名空间+类名
+            intPosition = strUIFromName.IndexOf('.');
+            if (intPosition != -1)
+            {
+                //剪切字符串中“.”之间的部分
+                strUIFromName = strUIFromName.Substring(intPosition + 1);
+            }
+
+            UIManager.GetInstance().CloseUIForms(strUIFromName);
+        }
+
+        /// <summary>
+        /// 发送消息
+        /// </summary>
+        /// <param name="msgType">消息的类型</param>
+        /// <param name="msgName">消息名称</param>
+        /// <param name="msgContent">消息内容</param>
+        //protected void SendMessage(string msgType, string msgName, object msgContent)
+        //{
+        //    KeyValuesUpdate kvs = new KeyValuesUpdate(msgName, msgContent);
+        //    MessageCenter.SendMessage(msgType, kvs);
+        //}
+
+        /// <summary>
+        /// 接收消息
+        /// </summary>
+        /// <param name="messagType">消息分类</param>
+        /// <param name="handler">消息委托</param>
+        //public void ReceiveMessage(string messagType, MessageCenter.DelMessageDelivery handler)
+        //{
+        //    MessageCenter.AddMsgListener(messagType, handler);
+        //}
+
+        /// <summary>
+        /// 显示语言
+        /// </summary>
+        /// <param name="id"></param>
+        //public string Show(string id)
+        //{
+        //    string strResult = string.Empty;
+
+        //    strResult = LauguageMgr.GetInstance().ShowText(id);
+        //    return strResult;
+        //}
+
+
         #endregion
     }
 }
