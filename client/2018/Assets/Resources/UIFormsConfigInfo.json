@@ -3,11 +3,11 @@
 [
 {"Key":"本配置文件说明"},
 
-{"Key":"UILogin",
+{"Key":"UILoginForm",
 "Value":"UIPrefabs\\UILoginForm"},
 
-{"Key":"SelectHeroUIForm",
-"Value":"UIPrefabs\\SelectHeroUIForm"},
+{"Key":"UISelectHeroForm",
+"Value":"UIPrefabs\\UISelectHeroForm"},
 
 {"Key":"MainCityUIForm",
 "Value":"UIPrefabs\\MainCityUIForm"},

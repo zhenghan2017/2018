@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Define
+namespace UIForm
 {
     public class UIDefine
     {
@@ -34,7 +34,7 @@ namespace Define
         public const string LOGON_FROMS = "UILoginForm";
         public const string MAIN_CITY_UIFORM = "MainCityUIForm";
         public const string HERO_INFO_UIFORM = "HeroInfoUIForm";
-        public const string SELECT_HERO_FORM = "SelectHeroUIForm";
+        public const string SELECT_HERO_FORM = "UISelectHeroForm";
         public const string PRO_DETAIL_UIFORM = "PropDetailUIForm";
         public const string MARKET_UIFORM = "MarketUIFrom";
 

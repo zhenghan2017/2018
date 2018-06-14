@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Tool;
-using Define;
 
 namespace UIForm
 {
@@ -246,7 +245,7 @@ namespace UIForm
             //根据“UI窗体名称”，加载“预设克隆体”
             if (!string.IsNullOrEmpty(strUIFormPaths))
             {
-                //goCloneUIPrefabs = ResourcesMgr.GetInstance().LoadAsset(strUIFormPaths, false);
+                goCloneUIPrefabs = ResourcesMgr.GetInstance().LoadAsset(strUIFormPaths, false);
             }
             //设置“UI克隆体”的父节点（根据克隆体中带的脚本中不同的“位置信息”）
             if (_TraCanvasTransfrom != null && goCloneUIPrefabs != null)
