@@ -52,14 +52,15 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Define\MsgDefine.cs" />
-     <Compile Include="Assets\Scripts\Define\UIDefine.cs" />
      <Compile Include="Assets\Scripts\main.cs" />
      <Compile Include="Assets\Scripts\Message\Callback.cs" />
      <Compile Include="Assets\Scripts\Message\MessageCenter.cs" />
+     <Compile Include="Assets\Scripts\Projects\UI\UILogin.cs" />
+     <Compile Include="Assets\Scripts\Projects\UI\UISelectHeroForm.cs" />
      <Compile Include="Assets\Scripts\Tools\ResourcesMgr.cs" />
      <Compile Include="Assets\Scripts\Tools\ToolUtils.cs" />
      <Compile Include="Assets\Scripts\UI\EventTriggerListener.cs" />
-     <Compile Include="Assets\Scripts\UI\UILogin.cs" />
+     <Compile Include="Assets\Scripts\UI\UIDefine.cs" />
      <Compile Include="Assets\Scripts\UI\UIManager.cs" />
      <Compile Include="Assets\Scripts\UI\UIObject.cs" />
      <Compile Include="Assets\Scripts\UI\UIType.cs" />
