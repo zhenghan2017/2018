@@ -20,11 +20,11 @@
 sysinfo.txt
 
 # Unity3D auto ceate Folder
-/Library/
-/obj/
-/Packages/
-/Temp/
-/.vs/
+/client/2018/Library/
+/client/2018/Assets/obj/
+/client/2018/Packages/
+/client/2018/Temp/
+/client/2018/Assets/.vs/
 
 *.apk
 *.unitypackage

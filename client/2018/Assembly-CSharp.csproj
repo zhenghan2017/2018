@@ -51,11 +51,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\NewBehaviourScript.cs" />
      <Compile Include="Assets\Scripts\Define\MsgDefine.cs" />
+     <Compile Include="Assets\Scripts\GameScene.cs" />
      <Compile Include="Assets\Scripts\main.cs" />
      <Compile Include="Assets\Scripts\Message\Callback.cs" />
      <Compile Include="Assets\Scripts\Message\MessageCenter.cs" />
+     <Compile Include="Assets\Scripts\Message\SettingCommand.cs" />
+     <Compile Include="Assets\Scripts\Player\Player.cs" />
+     <Compile Include="Assets\Scripts\Projects\GameRoot.cs" />
+     <Compile Include="Assets\Scripts\Projects\GlobalData.cs" />
      <Compile Include="Assets\Scripts\Projects\UI\UILogin.cs" />
+     <Compile Include="Assets\Scripts\Projects\UI\UIMainScene.cs" />
+     <Compile Include="Assets\Scripts\Projects\UI\UIMainSetting.cs" />
      <Compile Include="Assets\Scripts\Projects\UI\UISelectHeroForm.cs" />
      <Compile Include="Assets\Scripts\Tools\ResourcesMgr.cs" />
      <Compile Include="Assets\Scripts\Tools\ToolUtils.cs" />
@@ -65,10 +73,10 @@
      <Compile Include="Assets\Scripts\UI\UIObject.cs" />
      <Compile Include="Assets\Scripts\UI\UIType.cs" />
  <Reference Include="UnityEditor.StandardEvents">
- <HintPath>E:/mygame/2018/client/2018/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ <HintPath>E:/game/client/2018/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>E:/mygame/2018/client/2018/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>E:/game/client/2018/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -301,6 +309,10 @@
  <Reference Include="Boo.Lang">
  <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/Boo.Lang.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{F553CAFB-45E8-2CBB-D25A-2C5BF3216683}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

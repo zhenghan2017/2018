@@ -219,14 +219,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="2018.Plugins.csproj">
+      <Project>{C2C87EE7-F408-FAEB-333A-8D48D2C42FC6}</Project>
+      <Name>2018.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\Scripts\Define\MsgDefine.cs" />
+    <Compile Include="Assets\Scripts\main.cs" />
     <Compile Include="Assets\Scripts\Message\Callback.cs" />
     <Compile Include="Assets\Scripts\Message\MessageCenter.cs" />
+    <Compile Include="Assets\Scripts\Player\SettingCommand.cs" />
+    <Compile Include="Assets\Scripts\Projects\GlobalData.cs" />
+    <Compile Include="Assets\Scripts\Projects\UI\UILogin.cs" />
+    <Compile Include="Assets\Scripts\Projects\UI\UIMainScene.cs" />
+    <Compile Include="Assets\Scripts\Projects\UI\UIMainSetting.cs" />
+    <Compile Include="Assets\Scripts\Projects\UI\UISelectHeroForm.cs" />
+    <Compile Include="Assets\Scripts\Tools\ResourcesMgr.cs" />
     <Compile Include="Assets\Scripts\Tools\ToolUtils.cs" />
     <Compile Include="Assets\Scripts\UI\EventTriggerListener.cs" />
+    <Compile Include="Assets\Scripts\UI\UIDefine.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\UI\UIObject.cs" />
     <Compile Include="Assets\Scripts\UI\UIType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Plugins\PathologicalGames\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

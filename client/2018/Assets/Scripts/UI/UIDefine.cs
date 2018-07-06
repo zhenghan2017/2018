@@ -7,8 +7,8 @@ namespace UIForm
     public class UIDefine
     {
         /* 路径常量 */
-        public const string UI_PATH_CANVAS = "Canvas";
-        public const string UI_PATH_UIFORMS_CONFIG_INFO = "UIFormsConfigInfo";
+        public const string UI_PATH_CANVAS = "UICanvas";
+        public const string UI_PATH_UIFORMS_CONFIG_INFO = "JsonConfig/UIFormsConfigInfo";
         public const string UI_PATH_CONFIG_INFO = "UIConfigInfo";
 
         /* 标签常量 */
@@ -31,12 +31,18 @@ namespace UIForm
         public const float UI_UIMASK_IMPENETRABLE_COLOR_RGB_A = 200F / 255F;
 
         /* 常量定义： UI窗体名称 */
+        //测试用
         public const string LOGON_FROMS = "UILoginForm";
         public const string MAIN_CITY_UIFORM = "MainCityUIForm";
         public const string HERO_INFO_UIFORM = "HeroInfoUIForm";
         public const string SELECT_HERO_FORM = "UISelectHeroForm";
         public const string PRO_DETAIL_UIFORM = "PropDetailUIForm";
         public const string MARKET_UIFORM = "MarketUIFrom";
+        //正式
+        public const string UI_MAIN_SCENE_FORM = "UIMainSceneForm";   //主场景UI
+        public const string UI_MAIN_SETTING_FORM = "UIMainSettingForm";  //主场景设置界面
+
+
 
         /* 摄像机层深的常量 */
 

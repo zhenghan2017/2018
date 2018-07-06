@@ -1,0 +1,12 @@
+﻿{
+"ConfigInfo":
+  [
+    { "Key": "本配置文件说明" },
+
+    {
+      "Key": "UIMainSceneForm",
+      "Value": "UIPrefabs\\UIMainSceneForm"
+    }
+
+  ]
+}

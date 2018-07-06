@@ -200,7 +200,7 @@ namespace UIForm
         //初始化加载（根UI窗体）Canvas预设
         private void InitRootCanvasLoading()
         {
-            //ResourcesMgr.GetInstance().LoadAsset(UIDefine.UI_PATH_CANVAS, false);
+            ResourcesMgr.GetInstance().LoadAsset(UIDefine.UI_PATH_CANVAS, false);
         }
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace UIForm
         {
             RegisterButtonObjectEvent("Btn_OK",
                 p => OpenUIForm(UIDefine.SELECT_HERO_FORM)
-                );
+            );
         }
 
     }

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224660899021715554}
   - component: {fileID: 222079725183313124}
   - component: {fileID: 114099561571085948}
-  - component: {fileID: 114314184122040440}
+  - component: {fileID: 114157293423371262}
   m_Layer: 5
   m_Name: UILoginForm
   m_TagString: _TestTagLogonUIFroms
@@ -256,6 +256,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114157293423371262
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1095305875847860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59421c42c979d694bb34b882ecc09b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114308505291749604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -283,17 +294,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114314184122040440
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1095305875847860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24c8b1ee87c6f134ab2286a0dffb6ff5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114337442577439902
 MonoBehaviour:
   m_ObjectHideFlags: 1

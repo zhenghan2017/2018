@@ -9,10 +9,10 @@ namespace Tool
     internal class KeyValuesInfo
     {
         //配置信息
-        public List<KeyValuesNode> ConfigInfo = null;
+        public List<KeyValuesItem> ConfigInfo = null;
     }
     [Serializable]
-    internal class KeyValuesNode
+    internal class KeyValuesItem
     {
         //键
         public string Key = null;
@@ -93,11 +93,11 @@ namespace Tool
             }
             catch
             {
-                Debug.LogError("getConfigByJson Read JsonPath " + _path + "is error");
+                Debug.LogError("getConfigByJson Read JsonPath " + _path + " is error");
                 //throw new JsonAnlysisException(GetType() + "/InitAndAnalysisJson()/Json Analysis Exception ! Parameter jsonPath=" + jsonPath);
             }
             //数据加载到AppSetting 集合中
-            foreach (KeyValuesNode nodeInfo in keyvalueInfoObj.ConfigInfo)
+            foreach (KeyValuesItem nodeInfo in keyvalueInfoObj.ConfigInfo)
             {
                 _AppSetting.Add(nodeInfo.Key, nodeInfo.Value);
             }
