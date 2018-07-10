@@ -1,0 +1,15 @@
+{
+  "name": "2018-server",
+  "version": "0.0.0",
+  "description": "A few young people's idea",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "han",
+  "license": "ISC",
+  "dependencies": {
+    "crc": "^3.5.0",
+    "pomelo": "^2.2.5"
+  }
+}

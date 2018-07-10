@@ -1,0 +1,32 @@
+{
+  "development":{
+    "gate":[
+      {"id": "gate-server-1", "host": "127.0.0.1", "clientPort": 3014, "frontend": true}
+    ],
+    "connector": [
+      {"id": "connector-server-1", "host": "127.0.0.1", "port": 3150, "clientPort": 2150, "frontend": true},
+      {"id": "connector-server-2", "host": "127.0.0.1", "port": 3151, "clientPort": 2151, "frontend": true},
+      {"id": "connector-server-3", "host": "127.0.0.1", "port": 3152, "clientPort": 2152, "frontend": true}
+    ],
+    "area": [
+      {"id": "area-server-1", "host": "127.0.0.1", "port": 3250, "clientPort": 2250},
+      {"id": "area-server-2", "host": "127.0.0.1", "port": 3251, "clientPort": 2251},
+      {"id": "area-server-3", "host": "127.0.0.1", "port": 3252, "clientPort": 2252}
+    ]
+  },
+  "production":{
+    "gate":[
+      {"id": "gate-server-1", "host": "127.0.0.1", "clientPort": 3014, "frontend": true}
+    ],
+    "connector": [
+      {"id": "connector-server-1", "host": "127.0.0.1", "port": 3150, "clientPort": 2150, "frontend": true},
+      {"id": "connector-server-2", "host": "127.0.0.1", "port": 3151, "clientPort": 2151, "frontend": true},
+      {"id": "connector-server-3", "host": "127.0.0.1", "port": 3152, "clientPort": 2152, "frontend": true}
+    ],
+    "area": [
+      {"id": "area-server-1", "host": "127.0.0.1", "port": 3250, "clientPort": 2250},
+      {"id": "area-server-2", "host": "127.0.0.1", "port": 3251, "clientPort": 2251},
+      {"id": "area-server-3", "host": "127.0.0.1", "port": 3252, "clientPort": 2252}
+    ]
+  }
+}
