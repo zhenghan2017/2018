@@ -1,0 +1,22 @@
+{
+  "normalResponse": {
+    "code": 200,
+    "msg": "OK"
+  },
+  "paramsError": {
+    "code": 0,
+    "msg": "请求参数错误"
+  },
+  "userInfoError": {
+    "code": 1,
+    "msg": "用户名或者密码错误"
+  },
+  "oldPasswordError": {
+    "code": 2,
+    "msg": "旧密码错误"
+  },
+  "abnormalLogin": {
+    "code": 3,
+    "msg": "您当前访问的IP跟上次访问的IP不同，需要进行验证"
+  }
+}

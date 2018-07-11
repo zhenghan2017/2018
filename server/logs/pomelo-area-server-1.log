@@ -1,5 +1,0 @@
-[2018-07-10 15:07:31.041] [INFO] pomelo - [32m[E:\zhenghan\code\2018\server\node_modules\_pomelo@2.2.5@pomelo\lib\application.js] [39mapplication inited: "area-server-1"
-[2018-07-10 15:07:32.353] [INFO] pomelo - [32m[E:\zhenghan\code\2018\server\node_modules\_pomelo@2.2.5@pomelo\lib\application.js] [39m"area-server-1" enter after start...
-[2018-07-10 15:07:32.354] [INFO] pomelo - [32m[E:\zhenghan\code\2018\server\node_modules\_pomelo@2.2.5@pomelo\lib\application.js] [39m"area-server-1" finish start
-[2018-07-10 15:07:32.354] [INFO] pomelo - [32m[E:\zhenghan\code\2018\server\node_modules\_pomelo@2.2.5@pomelo\lib\application.js] [39m"area-server-1" startup in 1092 ms
-[2018-07-10 15:07:32.420] [DEBUG] pomelo - [36m[E:\zhenghan\code\2018\server\node_modules\_pomelo@2.2.5@pomelo\lib\modules\monitorwatcher.js] [39m[area-server-1] receive addServer signal: {"action":"addServer","server":{"main":"E:\\zhenghan\\code\\2018\\server\\app.js","env":"development","id":"connector-server-1","host":"127.0.0.1","port":3150,"clientPort":2150,"frontend":"true","serverType":"connector","pid":10424}}

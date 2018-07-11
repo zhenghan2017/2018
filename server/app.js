@@ -1,44 +1,17 @@
-const pomelo = require('pomelo');
+const express = require('express');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+const socket = require('socket.io');
 
-// 初始化
-var app = pomelo.createApp();
+// 初始化app
+let app = express();
 
-// gate配置参数
-app.configure('production|development', 'gate', function(){
-  app.set('connectorConfig',
-    {
-      connector : pomelo.connectors.hybridconnector,
-      heartbeat : 3
-    });
-});
+const userRoute = require('./router/userRoute');
 
-// connector配置参数
-app.configure('production|development', 'connector', function(){
-  app.set('connectorConfig',
-    {
-      connector : pomelo.connectors.hybridconnector,
-      heartbeat : 3,
-      // useDict : true,
-      useProtobuf : true
-    });
-});
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/user', userRoute);
 
-// connector配置参数
-app.configure('production|development', 'area', function(){
-  app.set('connectorConfig',
-    {
-      connector : pomelo.connectors.hybridconnector,
-      heartbeat : 3,
-      // useDict : true,
-      useProtobuf : true
-    });
-});
-
-// 开启app
-app.start();
-console.log('app start on ');
-
-// 监听Node进程未捕获的错误，建议不要开启。
-// process.on('uncaughtException', function (err) {
-//   console.error(' Caught exception: ' + err.stack);
-// });
+app.listen(2018);
+console.info('server start on 127.0.0.1:2018');
