@@ -15,8 +15,16 @@
     "code": 2,
     "msg": "旧密码错误"
   },
-  "abnormalLogin": {
+  "abnormalLoginError": {
     "code": 3,
     "msg": "您当前访问的IP跟上次访问的IP不同，需要进行验证"
+  },
+  "playerNotFoundError": {
+    "code": 4,
+    "msg": "该用户未创建玩家"
+  },
+  "tokenError": {
+    "code": 5,
+    "msg": "请检查您的登录凭证(token)"
   }
 }
