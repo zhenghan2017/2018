@@ -7,11 +7,17 @@ const user = require('../module/user');
 const configResponse = require('../config/configResponse.json');
 const configToken = require('../config/configToken.json');
 const redisClient =require('../public/util/redisClient');
-const _client = redisClient.start();
 
-// 注册
+/**
+ * 注册功能
+ * 
+ * @param {String}  account  用户名
+ * @param {String}  password 密码
+ * @param {String}  contact  联系方式
+ * 
+ */
 router.post('/register', function(req, res, next) {
-  const params = ['account', 'password'];
+  const params = ['account', 'password', 'contact'];
   const flag = base.paramsJudge(req.body, params);
   if(flag) {
     return res.send({
@@ -22,6 +28,7 @@ router.post('/register', function(req, res, next) {
   const userMsg = {
     name: req.body.account,
     password: req.body.password,
+    contact: req.body.contact,
     from: base.getClintIp(req)
   }
   user.createUser(userMsg)
@@ -33,7 +40,14 @@ router.post('/register', function(req, res, next) {
     })
 });
 
-// 修改密码 
+/**
+ * 修改密码功能
+ * 
+ * @param {Bigint}  uid  用户ID
+ * @param {String}  oldPassword 旧密码
+ * @param {String}  newPassword  新密码
+ * 
+ */
 router.post('/update_password', function(req, res, next) {
   const params = ['uid', 'oldPassword', 'newPassword'];
   const flag = base.paramsJudge(req.body, params);
@@ -69,7 +83,12 @@ router.post('/update_password', function(req, res, next) {
     })
 });
 
-// 注销
+/**
+ * 注销功能
+ * 
+ * @param {Bigint}  uid  用户ID
+ * 
+ */
 router.post('/cancellation', function(req, res, next) {
   const params = ['uid'];
   const flag = base.paramsJudge(req.body, params);
@@ -89,7 +108,12 @@ router.post('/cancellation', function(req, res, next) {
     })
 });
 
-// 检测登录的IP是否跟上次相同
+/**
+ * 检测是否异常登录功能
+ * 
+ * @param {String}  account  用户名
+ * 
+ */
 router.post('/check_abnormal_login', function(req, res, next) {
   const params = ['account'];
   const flag = base.paramsJudge(req.body, params);
@@ -107,8 +131,8 @@ router.post('/check_abnormal_login', function(req, res, next) {
       let code = 200;
       let msg = 'OK';
       if(currentIp !== lastLoginIp) {
-        code = configResponse.abnormalLogin.code;
-        msg = configResponse.abnormalLogin.msg;
+        code = configResponse.abnormalLoginError.code;
+        msg = configResponse.abnormalLoginError.msg;
       }
       res.send({code: code, msg: msg});
     })
@@ -117,7 +141,13 @@ router.post('/check_abnormal_login', function(req, res, next) {
     })
 });
 
-// 登录
+/**
+ * 登录功能
+ * 
+ * @param {String}  account  用户名
+ * @param {String}  password 密码
+ * 
+ */
 router.post('/login', function(req, res, next) {
   const params = ['account', 'password'];
   const flag = base.paramsJudge(req.body, params);
@@ -163,11 +193,10 @@ router.post('/login', function(req, res, next) {
       // 去除密码等敏感信息
       delete results.password;
       // 将token信息存入redis
-      _client.set(payLoad.uid + payLoad.name, results.token, function(err, vals) {
-        if(err) {
-          Promise.reject(err);
-        }
-      });
+      return redisClient.setKey(payLoad.uid + payLoad.name, results.token);
+    })
+    .then(function(reply) {
+      moment(results.lastLoginTime).format('YYYY-MM-DD');
       res.send({code: 200, msg: 'OK', results: results});
     })
     .catch(function(err) {
