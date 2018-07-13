@@ -5,7 +5,9 @@ const pool = mysql.createPool({
     user: 'root',
     password: 'root',
     database: '2018',
-    port: '3306'
+    port: '3306',
+    // 设置正确的时区
+    timezone:"08:00"
 });
 
 const dbHandler = function(sql) {
