@@ -109,39 +109,6 @@ router.post('/cancellation', function(req, res, next) {
 });
 
 /**
- * 检测是否异常登录功能
- * 
- * @param {String}  account  用户名
- * 
- */
-router.post('/check_abnormal_login', function(req, res, next) {
-  const params = ['account'];
-  const flag = base.paramsJudge(req.body, params);
-  if(flag) {
-    return res.json({
-      code: configResponse.paramsError.code,
-      msg: configResponse.paramsError.msg
-    });
-  }
-  const account = req.body.account;
-  user.selectUserByName(account)
-    .then(function(reply) {
-      let currentIp = base.getClintIp(req);
-      let lastLoginIp = reply[0].lastLoginIp;
-      let code = 200;
-      let msg = 'OK';
-      if(lastLoginIp && currentIp !== lastLoginIp) {
-        code = configResponse.abnormalLoginError.code;
-        msg = configResponse.abnormalLoginError.msg;
-      }
-      res.json({code: code, msg: msg});
-    })
-    .catch(function(err) {
-      res.json(err);
-    })
-});
-
-/**
  * 登录功能
  * 
  * @param {String}  account  用户名
@@ -163,10 +130,20 @@ router.post('/login', function(req, res, next) {
   // 验证用户信息
   user.selectUserByName(account)
     .then(function(reply) {
+      // 检验用户信息是否正确
       if(reply.length === 0 || password !== reply[0].password) {
         return Promise.reject({
           code: configResponse.userInfoError.code, 
           msg: configResponse.userInfoError.msg
+        });
+      }
+      // 验证登录是否异常
+      let currentIp = base.getClintIp(req);
+      let lastLoginIp = reply[0].lastLoginIp;
+      if(lastLoginIp && currentIp !== lastLoginIp) {
+        return Promise.reject({
+          code: configResponse.abnormalLoginError.code, 
+          msg: configResponse.abnormalLoginError.msg
         });
       }
       results = reply[0];
