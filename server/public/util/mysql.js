@@ -14,11 +14,11 @@ const dbHandler = function(sql) {
     return new Promise(function(resolve, reject) {
         pool.getConnection(function(err, conn) {
             if(err){
-                reject(err);
+                reject({code: 500, err: err});
             }else{
                 conn.query(sql,function(err, vals, fields) {
                     if(err) {
-                        reject(err);
+                        reject({code: 500, err: err});
                     }
                     //释放连接
                     conn.release();

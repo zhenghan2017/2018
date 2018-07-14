@@ -26,5 +26,9 @@
   "tokenError": {
     "code": 5,
     "msg": "请检查您的登录凭证(token)"
+  },
+  "sqlNotFoundError": {
+    "code": 6,
+    "msg": "未找到相关记录"
   }
 }

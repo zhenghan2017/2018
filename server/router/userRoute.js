@@ -20,7 +20,7 @@ router.post('/register', function(req, res, next) {
   const params = ['account', 'password', 'contact'];
   const flag = base.paramsJudge(req.body, params);
   if(flag) {
-    return res.send({
+    return res.json({
       code: configResponse.paramsError.code,
       msg: configResponse.paramsError.msg
     });
@@ -33,10 +33,10 @@ router.post('/register', function(req, res, next) {
   }
   user.createUser(userMsg)
     .then(function(reply) {
-      res.send(configResponse.normalResponse);
+      res.json(configResponse.normalResponse);
     })
     .catch(function(err) {
-      res.send({code: 500, msg: err});
+      res.json(err);
     })
 });
 
@@ -52,7 +52,7 @@ router.post('/update_password', function(req, res, next) {
   const params = ['uid', 'oldPassword', 'newPassword'];
   const flag = base.paramsJudge(req.body, params);
   if(flag) {
-    return res.send({
+    return res.json({
       code: configResponse.paramsError.code,
       msg: configResponse.paramsError.msg
     });
@@ -64,7 +64,7 @@ router.post('/update_password', function(req, res, next) {
     .then(function(reply) {
       let _password = reply[0].password;
       if(_password !== oldPassword) {
-        return res.send({
+        return Promise.reject({
           code: configResponse.oldPasswordError.code,
           msg: configResponse.oldPasswordError.msg
         });
@@ -76,10 +76,10 @@ router.post('/update_password', function(req, res, next) {
       return user.updatePassword(userMsg);
     })
     .then(function(reply) {
-      res.send({code: 200, msg: 'OK'});
+      res.json({code: 200, msg: 'OK'});
     })
     .catch(function(err) {
-      res.send({code: 500, msg: err})
+      res.json(err);
     })
 });
 
@@ -93,7 +93,7 @@ router.post('/cancellation', function(req, res, next) {
   const params = ['uid'];
   const flag = base.paramsJudge(req.body, params);
   if(flag) {
-    return res.send({
+    return res.json({
       code: configResponse.paramsError.code,
       msg: configResponse.paramsError.msg
     });
@@ -101,10 +101,10 @@ router.post('/cancellation', function(req, res, next) {
   const uid = req.body.uid;
   user.deleteUser(uid)
     .then(function(reply) {
-      res.send(configResponse.normalResponse);
+      res.json(configResponse.normalResponse);
     })
     .catch(function(err) {
-      res.send({code: 500, msg: err})
+      res.json(err);
     })
 });
 
@@ -118,7 +118,7 @@ router.post('/check_abnormal_login', function(req, res, next) {
   const params = ['account'];
   const flag = base.paramsJudge(req.body, params);
   if(flag) {
-    return res.send({
+    return res.json({
       code: configResponse.paramsError.code,
       msg: configResponse.paramsError.msg
     });
@@ -130,14 +130,14 @@ router.post('/check_abnormal_login', function(req, res, next) {
       let lastLoginIp = reply[0].lastLoginIp;
       let code = 200;
       let msg = 'OK';
-      if(currentIp !== lastLoginIp) {
+      if(lastLoginIp && currentIp !== lastLoginIp) {
         code = configResponse.abnormalLoginError.code;
         msg = configResponse.abnormalLoginError.msg;
       }
-      res.send({code: code, msg: msg});
+      res.json({code: code, msg: msg});
     })
     .catch(function(err) {
-      res.send(err);
+      res.json(err);
     })
 });
 
@@ -152,7 +152,7 @@ router.post('/login', function(req, res, next) {
   const params = ['account', 'password'];
   const flag = base.paramsJudge(req.body, params);
   if(flag) {
-    return res.send({
+    return res.json({
       code: configResponse.paramsError.code,
       msg: configResponse.paramsError.msg
     });
@@ -163,8 +163,8 @@ router.post('/login', function(req, res, next) {
   // 验证用户信息
   user.selectUserByName(account)
     .then(function(reply) {
-      if(password !== reply[0].password) {
-        return res.send({
+      if(reply.length === 0 || password !== reply[0].password) {
+        return Promise.reject({
           code: configResponse.userInfoError.code, 
           msg: configResponse.userInfoError.msg
         });
@@ -197,10 +197,10 @@ router.post('/login', function(req, res, next) {
     })
     .then(function(reply) {
       moment(results.lastLoginTime).format('YYYY-MM-DD');
-      res.send({code: 200, msg: 'OK', results: results});
+      res.json({code: 200, msg: 'OK', results: results});
     })
     .catch(function(err) {
-      res.send({code: 500, msg: err});
+      res.json(err);
     })
 });
 

@@ -14,7 +14,7 @@ router.post('/check_player_exist', function(req, res, next) {
   const params = ['uid'];
   const flag = base.paramsJudge(req.body, params);
   if(flag) {
-    return res.send({
+    return res.json({
       code: configResponse.paramsError.code,
       msg: configResponse.paramsError.msg
     });
@@ -30,10 +30,10 @@ router.post('/check_player_exist', function(req, res, next) {
         msg = configResponse.playerNotFoundError.msg;
         results = {};
       }
-      res.send({code: code, msg: msg, results: results});
+      res.json({code: code, msg: msg, results: results});
     })
     .catch(function(err) {
-      res.send({code: 500, msg: err});
+      res.json({code: 500, msg: err});
     })
 });
 
@@ -44,14 +44,14 @@ router.post('/check_player_exist', function(req, res, next) {
 router.post('/select_player_type', function(req, res, next) {
   player.getAllPlayerType()
     .then(function(reply) {
-      res.send({
+      res.json({
         code: 200,
         msg: 'OK',
         results: reply
       });
     })
     .catch(function(err) {
-      res.send({code: 500, msg: err});
+      res.json({code: 500, msg: err});
     })
 });
 
@@ -67,7 +67,7 @@ router.post('/create_player', function(req, res, next) {
   const params = ['uid', 'kid', 'name'];
   const flag = base.paramsJudge(req.body, params);
   if(flag) {
-    return res.send({
+    return res.json({
       code: configResponse.paramsError.code,
       msg: configResponse.paramsError.msg
     });
@@ -97,14 +97,14 @@ router.post('/create_player', function(req, res, next) {
       return player.getPlayerInfoByUid(uid);
     })
     .then(function(reply) {
-      res.send({
+      res.json({
         code: 200,
         msg: 'OK',
         results: reply[0]
       });
     })
     .catch(function(err) {
-      res.send({code: 500, msg: err});
+      res.json({code: 500, msg: err});
     })
 });
 
@@ -119,7 +119,7 @@ router.post('/update_player_name', function(req, res, next) {
   const params = ['pid', 'name'];
   const flag = base.paramsJudge(req.body, params);
   if(flag) {
-    return res.send({
+    return res.json({
       code: configResponse.paramsError.code,
       msg: configResponse.paramsError.msg
     });
@@ -130,10 +130,10 @@ router.post('/update_player_name', function(req, res, next) {
   }
   player.updatePlayerNameByPid(playerMsg)
     .then(function(reply) {
-      res.send(configResponse.normalResponse);
+      res.json(configResponse.normalResponse);
     })
     .catch(function(err) {
-      res.send({code: 500, msg: err});
+      res.json({code: 500, msg: err});
     })
 });
 
@@ -147,7 +147,7 @@ router.post('/delete_player', function(req, res, next) {
   const params = ['pid'];
   const flag = base.paramsJudge(req.body, params);
   if(flag) {
-    return res.send({
+    return res.json({
       code: configResponse.paramsError.code,
       msg: configResponse.paramsError.msg
     });
@@ -155,10 +155,10 @@ router.post('/delete_player', function(req, res, next) {
   const pid = req.body.pid;
   player.deletePlayer(pid)
     .then(function(reply) {
-      res.send(configResponse.normalResponse);
+      res.json(configResponse.normalResponse);
     })
     .catch(function(err) {
-      res.send({code: 500, msg: err});
+      res.json({code: 500, msg: err});
     })
 });
 

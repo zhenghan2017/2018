@@ -9,14 +9,13 @@ const redisClient = {
       let _expire = expire || '';
       _client.set(key, value, function(err, results) {
         if(err) {
-          console.log(err);
-          reject(err);
+          reject({code: 500, err: err});
         }
         // 如果有传时间参数则设置过期时间，否则不设置
         if(_expire) {
           _client.expire(key, expire, function(err, results) {
             if(err) {
-              reject(err);
+              reject({code: 500, err: err});
             }
             resolve('OK');
           })
@@ -31,7 +30,7 @@ const redisClient = {
     return new Promise(function(resolve, reject) {
       _client.get(key, function(err, results) {
         if(err) {
-          reject(err);
+          reject({code: 500, err: err});
         }
         resolve(results);
       })
@@ -43,7 +42,7 @@ const redisClient = {
     return new Promise(function(resolve, reject) {
       _client.expire(key, expire, function(err, results) {
         if(err) {
-          reject(err);
+          reject({code: 500, err: err});
         }
         resolve('OK');
       })
@@ -55,7 +54,7 @@ const redisClient = {
     return new Promise(function(resolve, reject) {
       _client.TTL(key, function(err, results) {
         if(err) {
-          reject(err);
+          reject({code: 500, err: err});
         }
         resolve(results);
       })
