@@ -30,5 +30,13 @@
   "sqlNotFoundError": {
     "code": 6,
     "msg": "未找到相关记录"
+  },
+  "socketDisconnectError": {
+    "code": 7,
+    "msg": "用户连接断开"
+  },
+  "socketSelfError": {
+    "code": 8,
+    "msg": "socket自身错误"
   }
 }

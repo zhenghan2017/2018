@@ -59,6 +59,18 @@ const redisClient = {
         resolve(results);
       })
     })
+  },
+
+  // 删除键值
+  deleteKey: function(key) {
+    return new Promise(function(resolve, reject) {
+      _client.del(key, function(err, results) {
+        if(err) {
+          reject({code: 500, err: err});
+        }
+        resolve(results);
+      })
+    })
   }
 }
   
