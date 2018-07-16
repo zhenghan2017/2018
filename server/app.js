@@ -89,7 +89,7 @@ socketClient.on('connection', function(socket) {
   socket.on('onMove', function(userInfo) {
     redisClient.setKey(socketId, userInfo)
       .then(function(reply) {
-        socket.emit('connection', configResponse.normalResponse);
+        socket.emit('onMove', configResponse.normalResponse);
       })
       .catch(function(err) {
         socket.emit('error', err);
@@ -100,7 +100,7 @@ socketClient.on('connection', function(socket) {
    socket.on('onReconnect', function() {
     redisClient.getKey(socketId)
       .then(function(reply) {
-        socket.emit('connection', {
+        socket.emit('onReconnect', {
           code: 200,
           msg: 'OK',
           results: reply
@@ -115,7 +115,7 @@ socketClient.on('connection', function(socket) {
   socket.on('onLoginout', function() {
     redisClient.deleteKey(socketId, userInfo)
       .then(function(reply) {
-        socket.emit('connection', configResponse.normalResponse);
+        socket.emit('onLoginout', configResponse.normalResponse);
       })
       .catch(function(err) {
         socket.emit('error', err);
