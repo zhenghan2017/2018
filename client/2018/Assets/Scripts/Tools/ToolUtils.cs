@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using LitJson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -72,7 +74,7 @@ namespace Tool
         }
 
         /// <summary>
-        /// 通过地址读取Json文件保存到本地
+        /// 通过地址读取Json文件保存到内存
         /// Json的格式应为键值对应
         /// </summary>
         /// <param name="_path"></param>
@@ -102,6 +104,42 @@ namespace Tool
                 _AppSetting.Add(nodeInfo.Key, nodeInfo.Value);
             }
             return _AppSetting;
+        }
+
+        public static bool SetFile(Dictionary<string, string> saveInfo, string path)
+        {
+            Dictionary<int, KeyValuesItem> configMsg = new Dictionary<int, KeyValuesItem>();
+           
+            //item.Key = saveInfo["Tip"];
+            // configMsg.Add(0, item);
+            
+            JsonData _saveData = new JsonData();
+            int conut = 0;
+            _saveData["ConfigInfo"] = new JsonData();
+            JsonData arrayData = new JsonData();
+            arrayData.SetJsonType(JsonType.Array);
+            foreach (var temp in saveInfo)
+            {
+                JsonData _data = new JsonData();
+                Debug.Log(temp.Key + "  " + temp.Value);
+                _data["Key"] = temp.Key;
+                _data["Value"] = temp.Value;
+                arrayData.Add(_data);
+            }
+            _saveData["ConfigInfo"] = arrayData;
+            string values = JsonMapper.ToJson(_saveData);
+            //找到当前路径
+            Debug.Log("保存的Json: " + values);
+            FileInfo file = new FileInfo(path);
+            //判断有没有文件，有则打开文件，，没有创建后打开文件
+            StreamWriter sw = file.CreateText();
+            //将转换好的字符串存进文件，
+            sw.WriteLine(values);
+            //注意释放资源
+            sw.Close();
+            sw.Dispose();
+
+            return true;
         }
     }
 }

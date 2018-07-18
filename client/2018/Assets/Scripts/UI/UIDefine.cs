@@ -40,7 +40,7 @@ namespace UIForm
         public const string MARKET_UIFORM = "MarketUIFrom";
         //正式
         public const string UI_MAIN_SCENE_FORM = "UIMainSceneForm";   //主场景UI
-        public const string UI_MAIN_SETTING_FORM = "UIMainSettingForm";  //主场景设置界面
+        public const string UI_MAIN_SETTING_FORM = "UISettingForm";  //主场景设置界面
 
 
 

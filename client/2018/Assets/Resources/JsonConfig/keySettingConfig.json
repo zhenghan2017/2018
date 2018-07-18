@@ -1,7 +1,7 @@
 ﻿{
   "ConfigInfo": 
   [
-    { "Key": "根据keycode来保存自定义按键" },
+    { "Key": "Save custom keys based on keycode" },
 
     {
       "Key": "0",
@@ -22,6 +22,5 @@
       "Key": "3",
       "Value": "97"
     }
-
   ]
 }

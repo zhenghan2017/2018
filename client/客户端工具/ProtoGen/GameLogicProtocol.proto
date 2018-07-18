@@ -1,0 +1,102 @@
+//----------------protobuf格式------------
+// 字段格式：限定修饰符① | 数据类型② | 字段名称③ | = | 字段编码值④ | [字段默认值⑤]
+// 
+//----------------------------------------
+//----------------xxxxxxxxxxxx------------
+//----------------------------------------
+
+message nPosition
+{
+	optional sint32 posX = 1;     // 玩家x坐标
+	optional sint32 posY = 2;     // y坐标
+}
+
+//----------------心跳协议----------------
+message CMD_GAME_REQHEART
+{
+	
+}
+message CMD_GAME_RESPHEART
+{
+	
+}
+//----------------------------------------
+
+//----------------加入房间协议------------
+message CMD_GAME_REQJOINROOM
+{
+	optional fixed64 roomid = 1; //房间号
+	optional uint64 playerid = 2;  //玩家ID
+}
+message CMD_GAME_RESPJOINROOM
+{
+	optional sfixed32 flag = 1; //标识符
+}
+//----------------------------------------
+
+//----------------创建房间协议------------
+message CMD_GAME_REQCREATEROOM
+{
+	optional uint64 playerid = 1;  //玩家ID
+}
+message CMD_GAME_RESPCREATEROOM
+{
+	optional fixed64 roomid = 1;   //房间号
+	optional sfixed32 flag = 2; //标识符
+}
+//----------------------------------------
+
+//----------------玩家数据协议------------
+//可能需要将游戏中的与大厅的进行分离(这边暂时不分离)
+message CMD_GAME_REQPLAYERDATA
+{
+	optional uint64 playerid = 1;  //玩家ID
+}
+message CMD_GAME_RESPPLAYERDATA
+{
+	//玩家相关的数据 包括游戏数据和大厅数据
+	//游戏中的玩家数据是要将同一个房间下的所有玩家的数据都下发
+	//通过玩家ID可以判断是否是本地玩家
+	optional uint64 playerid = 1;
+	optional sfixed32 state = 15; //游戏中的状态
+	enum STATE {
+	    NULL = 0;
+	    PLAY = 1;
+	    DEAD = 2;
+	    LOOKON = 3;
+	}
+}
+//----------------------------------------
+
+//----------------移动协议----------------
+message CMD_GAME_REQMOVE
+{
+	optional nPosition pos = 1;
+	optional uint64 playerid = 2;  //玩家ID
+}
+message CMD_GAME_RESPMOVE
+{
+	optional sfixed32 flag = 1; //标识符
+	enum FLAG {
+		SUCCESS = 1,
+		
+	}
+}
+//----------------------------------------
+
+//----------------断线重连----------------
+message CMD_GAME_REQRELINK
+{
+	optional uint64 playerid = 1;
+}
+message CMD_GAME_RESPRELINK
+{
+	optional nPosition pos = 1;
+	optional sfixed32 flag = 2;
+	enum FLAG{
+		SUCCESS = 1,
+		//FAIL
+		GAMEFINISH = 8, //游戏结束
+	}
+}
+//----------------------------------------

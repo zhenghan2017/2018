@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Project
+public static class GlobalData
 {
-    public static class GlobalData
-    {
-        public static Player playerCpn;
-
-    }
+    //应该需要给这个加一个父类 ????? 实现不同人物的控制
+    public static Controller _Controller;
 
 }

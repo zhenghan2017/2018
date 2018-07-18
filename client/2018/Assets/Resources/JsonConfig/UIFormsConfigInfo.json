@@ -6,6 +6,11 @@
     {
       "Key": "UIMainSceneForm",
       "Value": "UIPrefabs\\UIMainSceneForm"
+    },
+
+	{
+      "Key": "UISettingForm",
+      "Value": "UIPrefabs\\UISettingForm"
     }
 
   ]

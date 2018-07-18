@@ -144,6 +144,24 @@ namespace UIForm
             }
         }
 
+        /// <summary>
+        /// 关闭所有窗口
+        /// </summary>
+        public void HideAllUIForms()
+        {
+            if (_DicALLUIForms.Count != 0)
+            {
+                Debug.Log("-----------隐藏窗口--------");
+                foreach (var tempUI in _DicALLUIForms)
+                {
+                    Debug.Log(tempUI.Key);
+                    tempUI.Value.hide();
+                }
+
+                Debug.Log("-----------隐藏结束----------");
+            }
+        }
+
         #region  显示“UI管理器”内部核心数据，测试使用
 
         /// <summary>
