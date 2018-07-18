@@ -4,8 +4,6 @@
 //----------------------------------------
 //----------------xxxxxxxxxxxx------------
 //----------------------------------------
-package gameLogicPackage;
-syntax = "proto3";
 
 message nPosition
 {
@@ -13,7 +11,7 @@ message nPosition
 	optional sint32 posY = 2;     // y坐标
 }
 
-message playerInfo
+message nPlayerInfo
 {
 	optional sint32 kindId = 1;						//玩家类型ID
 	optional string name = 2;							//玩家名称
@@ -73,7 +71,7 @@ message CMD_GAME_RESPPLAYERDATA
 	//游戏中的玩家数据是要将同一个房间下的所有玩家的数据都下发
 	//通过玩家ID可以判断是否是本地玩家
 	optional uint64 playerid = 1;
-	optional playerInfo player = 2;
+	optional nPlayerInfo player = 2;
 	optional sfixed32 flag = 3;
 	optional sfixed32 state = 15; //游戏中的状态
 	enum STATE {
@@ -95,7 +93,7 @@ message CMD_GAME_RESPMOVE
 {
 	optional sfixed32 flag = 1; //标识符
 	enum FLAG {
-		SUCCESS = 1,
+		SUCCESS = 1;
 		
 	}
 }
@@ -111,9 +109,9 @@ message CMD_GAME_RESPRELINK
 	optional nPosition pos = 1;
 	optional sfixed32 flag = 2;
 	enum FLAG{
-		SUCCESS = 1,
+		SUCCESS = 1;
 		//FAIL
-		GAMEFINISH = 8, //游戏结束
+		GAMEFINISH = 8; //游戏结束
 	}
 }
 //----------------------------------------

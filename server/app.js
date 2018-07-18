@@ -1,4 +1,5 @@
 const net = require('net');
+const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
@@ -9,7 +10,7 @@ const redisClient = require('./public/util/redisClient');
 const configResponse = require('./config/configResponse.json');
 const player = require('./module/player');
 const Protobuf = require('protobufjs');
-const library = Protobuf.loadSync('./config/GameLogicProtocol.proto');
+const root = Protobuf.loadSync('./config/GameLogicProtocolData.proto');
 
 // 初始化app
 let app = express();
@@ -140,29 +141,28 @@ app.listen(2018);
 console.info(`Express server listening at 127.0.0.1:2018`);
 
 const serverIP = "127.0.0.1";
-const serverPort = 2019;
+const serverPort = 9876;
  
-var socketServer = net.createServer(function(sock){
-
-    console.log("Accepting connection: " + sock.remoteAddress + ":" + sock.remotePort );
+var socketServer = net.createServer(function(socket){
+    console.log("Accepting connection: " + socket.remoteAddress + ":" + socket.remotePort );
     
-    sock.write("Login server based on Node.js success!");
+    socket.write("Login server based on Node.js success!");
     
-    sock.on("data",function(data){
-        console.log(sock.remoteAddress + ":" + sock.remotePort + " -> " + data);
-        
-        sock.write(`Node.js server received data ${data}`);
+    socket.on("data",function(data){
+        console.log(typeof data);
+        console.log(socket.remoteAddress + ":" + socket.remotePort + " -> " + data);
+        socket.write(`Node.js server received data ${data}`);
     });
     
     /*客户端调用closesocket或强制关闭时会导致服务器端会发射"close"事件，但是它发生在"error"事件之后。
-    sock.remoteAddress和sock.remotePort是undefined.*/
-    sock.on("close",function(data){
-        console.log(`${sock.remoteAddress}:${sock.remotePort} logout`);
+    socket.remoteAddress和socket.remotePort是undefined.*/
+    socket.on("close",function(data){
+        console.log(`${socket.remoteAddress}:${socket.remotePort} logout`);
     });
     
     /*必须监听一个“error”事件，否则在客户端调用closesocket或强制关闭时服务器端会发射“error"事件。
     如果没有该事件的处理程序，进程便会异常终止。*/
-    sock.on("error",function(error, data){
+    socket.on("error",function(error, data){
         if(error) {
             console.log(`Occurs an error: ${error}`);
         }

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-07-13 20:04:45
+Date: 2018-07-18 17:05:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,7 +24,7 @@ CREATE TABLE `model_player` (
   `userId` bigint(20) unsigned NOT NULL DEFAULT '0',
   `kindId` smallint(6) NOT NULL DEFAULT '0',
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `country` smallint(6) unsigned DEFAULT '0',
+  `country` varchar(20) COLLATE utf8_unicode_ci DEFAULT '',
   `rank` smallint(6) unsigned NOT NULL DEFAULT '0',
   `level` smallint(6) unsigned NOT NULL DEFAULT '1',
   `experience` int(20) unsigned NOT NULL DEFAULT '0',
@@ -45,18 +45,19 @@ CREATE TABLE `model_player` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `INDEX_GAME_NAME` (`name`),
   KEY `INDEX_PALYER_USER_ID` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of model_player
 -- ----------------------------
+INSERT INTO `model_player` VALUES ('1', '1', '1', 'hans', '0', '0', '1', '0', '10', '10', '300', '0.5', '500', '100', '100', '100', '100', '0', '0', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `model_player_type`
 -- ----------------------------
 DROP TABLE IF EXISTS `model_player_type`;
 CREATE TABLE `model_player_type` (
-  `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `title` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `hp` smallint(6) unsigned NOT NULL,
@@ -87,7 +88,7 @@ CREATE TABLE `model_user` (
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `contact` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `loginCount` smallint(6) unsigned DEFAULT '0',
+  `loginCount` int(11) unsigned DEFAULT '0',
   `lastLoginIp` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
   `lastLoginTime` date DEFAULT NULL,
   PRIMARY KEY (`id`),
