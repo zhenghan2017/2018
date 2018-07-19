@@ -5,109 +5,96 @@
 //----------------xxxxxxxxxxxx------------
 //----------------------------------------
 
+package gameLogicProtocolDataPackage;
+syntax = "proto3";
+
 message nPosition
 {
 	optional sint32 posX = 1;     // 玩家x坐标
 	optional sint32 posY = 2;     // y坐标
-}
-
-message nPlayerInfo
-{
-	optional sint32 kindId = 1;						//玩家类型ID
-	optional string name = 2;							//玩家名称
-	optional string country = 3;					//玩家国家
-	optional sint32 rank = 4;							//玩家rank分
-	optional sint32 level = 5;						//玩家等级
-	optional uint32 experience = 6;				//玩家经验
-	optional sint32 maxHp = 7;						//玩家最大血量
-	optional sint32 maxMp = 8;						//玩家最大蓝量
-	optional nPosition pos = 9;						//玩家坐标
+	optional sint32 angle = 3;    //角度
 }
 
 //----------------心跳协议----------------
-message CMD_GAME_REQHEART
+message DATA_GAME_REQHEART
 {
 	
 }
-message CMD_GAME_RESPHEART
+message DATA_GAME_RESPHEART
 {
 	
-}
-//----------------------------------------
-
-//----------------加入房间协议------------
-message CMD_GAME_REQJOINROOM
-{
-	optional fixed64 roomid = 1; //房间号
-	optional uint64 playerid = 2;  //玩家ID
-}
-message CMD_GAME_RESPJOINROOM
-{
-	optional sfixed32 flag = 1; //标识符
-}
-//----------------------------------------
-
-//----------------创建房间协议------------
-message CMD_GAME_REQCREATEROOM
-{
-	optional uint64 playerid = 1;  //玩家ID
-}
-message CMD_GAME_RESPCREATEROOM
-{
-	optional fixed64 roomid = 1;   //房间号
-	optional sfixed32 flag = 2; 	//标识符
 }
 //----------------------------------------
 
 //----------------玩家数据协议------------
-//可能需要将游戏中的与大厅的进行分离(这边暂时不分离)
-message CMD_GAME_REQPLAYERDATA
+message SelfPlayerInfo
 {
-	optional uint64 playerid = 1;  //玩家ID
+	optional uint32 kindid = 1;					   //玩家类型ID
+	optional uint32 speed = 2;                     //移速
+	optional uint32 attack = 3;                    //攻击力 
+	optional uint32 defenses = 4;                  //防御力  需要对应的减伤公式 ( X/（X＋100）)
+	optional uint32 maxHp = 7;					   //玩家最大血量
+	optional uint32 maxMp = 8;						//玩家最大蓝量
+	optional nPosition pos = 9;						//玩家坐标
 }
-message CMD_GAME_RESPPLAYERDATA
+
+message OtherPlayerInfo
 {
-	//玩家相关的数据 包括游戏数据和大厅数据
-	//游戏中的玩家数据是要将同一个房间下的所有玩家的数据都下发
-	//通过玩家ID可以判断是否是本地玩家
-	optional uint64 playerid = 1;
-	optional nPlayerInfo player = 2;
-	optional sfixed32 flag = 3;
-	optional sfixed32 state = 15; //游戏中的状态
-	enum STATE {
-	    NULL = 0;
-	    PLAY = 1;
-	    DEAD = 2;
-	    LOOKON = 3;
-	}
+	optional string playerid = 1;
+	optional uint32 kindid = 2;	
+	optional nPosition pos = 3;
+}
+message DATA_GAME_REQGAMEPLAYERINFO
+{
+	optional string playerid = 1;  //玩家ID
+}
+message DATA_GAME_RESPGAMEPLAYERINFO
+{
+	optional SelfPlayerInfo selfplayerinfo = 1;//自身玩家数据
+	repeated OtherPlayerInfo otherplayerinfo = 2;
 }
 //----------------------------------------
 
+
+
 //----------------移动协议----------------
-message CMD_GAME_REQMOVE
+message DATA_GAME_REQMOVE
 {
 	optional nPosition pos = 1;
-	optional uint64 playerid = 2;  //玩家ID
+	optional string playerid = 2;  //玩家ID
 }
-message CMD_GAME_RESPMOVE
+message DATA_GAME_RESPMOVE
 {
-	optional sfixed32 flag = 1; //标识符
+	optional nPosition pos = 1;
+	optional uint32 flag = 15; //标识符
 	enum FLAG {
 		SUCCESS = 1;
 		
+		PLAYER_DEAD = 2;
+		GAME_OVER = 3;
+		NOT_MOVE = 4; //移动受阻 受到技能效果 或者遇到障碍
+
 	}
 }
 //----------------------------------------
 
 //----------------断线重连----------------
-message CMD_GAME_REQRELINK
+message RelinkPlayerInfo
 {
-	optional uint64 playerid = 1;
+	optional string nickname    = 1;
+	optional uint32 team = 2; //所处的队伍 例如红黄蓝队
+	optional uint32 teamindex = 3; //所处队伍的位置
+	optional string playerid = 4;  //玩家ID
 }
-message CMD_GAME_RESPRELINK
+message DATA_GAME_REQRELINK
 {
-	optional nPosition pos = 1;
-	optional sfixed32 flag = 2;
+	optional string playerid = 1;
+	optional uint32 roomid  = 2;
+}
+message DATA_GAME_RESPRELINK
+{
+	repeated RelinkPlayerInfo relinkplayerinfo = 1; //获取大厅获得的玩家信息 然后再走一遍进入游戏的协议
+	optional uint32 flag = 15; //标识符
 	enum FLAG{
 		SUCCESS = 1;
 		//FAIL

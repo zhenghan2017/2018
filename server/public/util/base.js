@@ -11,7 +11,7 @@ const base = {
     return flag;
   },
 
-  // 返回终端类型
+  // 返回终端IP地址
   getClintIp: function (req) {
     let ip = 
       req.headers['x-forwarded-for'] ||
@@ -22,7 +22,7 @@ const base = {
     ip = ip.match(/\d+.\d+.\d+.\d+/);
     ip = ip ? ip.join('.') : null;
     return ip;
-  },
+  }
 }
 
 module.exports = base;

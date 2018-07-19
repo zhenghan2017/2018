@@ -1,0 +1,184 @@
+//----------------protobuf格式------------
+// 字段格式：限定修饰符① | 数据类型② | 字段名称③ | = | 字段编码值④ | [字段默认值⑤]
+// Repeated Optional
+// fixed32 需要比268 435 456大时使用
+// 
+//----------------------------------------
+//----------------xxxxxxxxxxxx------------
+// message DATA_LOBBY_REQ
+// {
+// }
+// message DATA_LOBBY_RESP
+// {
+// }
+//----------------------------------------
+
+package lobbyProtocolDataPackage;
+syntax = "proto3";
+
+//----------------玩家连接大厅------------
+message DATA_LOBBY_REQPLAYERCONNECT
+{
+	optional string playerid    = 1;         // 玩家id ,只要游客登录?
+}
+message DATA_LOBBY_RESPPLAYERCONNECT
+{
+	optional string nickname    = 1;         //昵称 
+	optional uint32 roomid     = 2;         //房间号 可以判断是否需要断线重连
+	optional uint32 flag      = 15;         //标识符
+	enum FLAG {
+		SUCCESS                 = 0;         //成功
+		UNKNOW_USERID           = 1;         //玩家不存在
+	}
+}
+//----------------------------------------
+
+
+//----------------心跳协议----------------
+message DATA_LOBBY_REQHEART
+{
+	
+}
+message DATA_LOBBY_RESPHEART
+{
+	
+}
+//----------------------------------------
+
+//请求房间列表(http协议) 
+//请求: 当前的页数
+//必要: 房间名 房主名 密码 当前人数 人数上限 房间状态 房间索引ID 当前页数 总页数 
+//不必要: 地图编号(?) 模式编号(?) 
+
+//----------------创建房间协议------------
+//请求成功时需要在服务器帮助玩家分配相应的房间内队伍id
+message DATA_LOBBY_REQCREATEROOM 
+{
+	optional string playerid = 1;  //玩家ID
+	optional string roomname = 2;  //房间名
+	optional uint32 roompassword = 3; //房间密码
+	optional uint32 maxplayer = 4; //人数上限 
+	optional uint32 mapindex = 5; //地图索引
+}
+message DATA_LOBBY_RESPCREATEROOM
+{
+	optional uint32 roomid = 1;   //房间号
+}
+//----------------------------------------
+
+//----------------加入房间协议------------
+message RoomPlayerInfo
+{
+	optional string nickname    = 1;
+	optional uint32 team = 2; //所处的队伍 例如红黄蓝队
+	optional uint32 teamindex = 3; //所处队伍的位置
+	optional bool isready = 4; //是否准备
+	optional string playerid = 5;  //玩家ID
+}
+message DATA_LOBBY_REQJOINROOM
+{
+	optional uint32 roomid = 1; //房间号  (房间号为空时需要帮助玩家随机分配房间?)
+	optional string  playerid = 2;  //玩家ID
+	optional uint32 roompassword = 3; //房间密码
+}
+message DATA_LOBBY_RESPJOINROOM
+{
+	repeated RoomPlayerInfo roomplayerinfo = 1; //房间玩家的信息
+	optional string roomuserid = 2; //房主
+	optional uint32 maxplayer = 3; //人数上限
+	optional uint32 mapindex = 4; //地图索引
+	optional uint32 flag = 15; //标识符
+	enum FLAG {
+		SUCCESS = 0;
+		FULL_PLAYER = 1; //房间人数已满
+		UNKNOW_ROOM = 2; //房间不存在
+		ROOM_GAMESTART = 3; //房间已经开始游戏
+	}
+}
+//----------------------------------------
+
+//----------------请求离开房间------------
+//如果离开玩家是当前房间的最后一名玩家 则解散房间
+message DATA_LOBBY_REQLEAVEROOM
+{
+	optional string playerid = 1;  //玩家ID
+	optional uint32 roomid = 2;   
+}
+message DATA_LOBBY_RESPLEAVEROOM
+{
+	optional string roomuserid = 1; //房主离开应该转交房主
+	optional uint32 flag = 15; //标识符
+	enum FLAG {
+		SUCCESS = 0;
+		ROOM_GAMESTART = 1; //已经开始游戏
+	}
+}
+//----------------------------------------
+
+//----------------请求开始游戏------------
+message DATA_LOBBY_REQROOMSTARTGAME
+{
+	optional uint32 roomid = 1;   
+}
+message DATA_LOBBY_RESPROOMSTARTGAME
+{
+	optional uint32 flag = 15; //标识符
+	enum FLAG {
+		SUCCESS = 0;
+		NOT_READY = 1; //有人为准备
+		ERROR_PLAYERNUM = 2; //人数不足
+	}
+}
+//----------------------------------------
+
+//LobbyPlayerAct 玩家动作
+//----------------玩家请求准备------------
+message DATA_LOBBY_REQREADY
+{
+	optional string playerid = 1;  //玩家ID
+	optional uint32 roomid = 2;  
+}
+message DATA_LOBBY_RESPREADY
+{
+	optional uint32 flag = 15; //标识符
+	enum FLAG {
+		SUCCESS = 0;
+		FAIL = 1; //准备失败????
+	}
+}
+//----------------------------------------
+
+//----------------玩家取消准备------------
+message DATA_LOBBY_REQCANCELREADY
+{
+	optional string playerid = 1;  //玩家ID
+	optional uint32 roomid = 2;  
+}
+message DATA_LOBBY_RESPCANCELREADY
+{
+	optional uint32 flag = 15; //标识符
+	enum FLAG {
+		SUCCESS = 0;
+		ROOM_GAMESTART = 1; //已经开始游戏
+	}
+}
+//----------------------------------------
+
+//----------------玩家交换位置------------
+message DATA_LOBBY_REQCHANGESEAT
+{
+	optional string playerid = 1;  //玩家ID
+	optional uint32 team = 2; //所处的队伍 例如红黄蓝队
+	optional uint32 teamindex = 3; //所处队伍的位置
+}
+message DATA_LOBBY_RESPCHANGESEAT
+{
+	optional uint32 flag = 15; //标识符
+	enum FLAG {
+		SUCCESS = 0;
+		FULL_TEAM = 1; //队伍人数已满
+	}
+}
+//----------------------------------------
+
+
