@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const socketServer = require('./app/socket');
+const player = require('./module/player');
+const redisClient = require('./public/util/redisClient');
 
 // 初始化app
 let app = express();
@@ -19,7 +21,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/user', userRoute);
 app.use('/player', playerRoute);
 
+// http服务开启
 app.listen(2018);
 console.info(`Express server listening at 127.0.0.1:2018`);
 
+// socket服务开启
 socketServer.start();
