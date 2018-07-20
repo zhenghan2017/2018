@@ -3,6 +3,22 @@ const redis = require('redis');
 const _client = redis.createClient(configRedis);
 
 const redisClient = {
+  // 检测键值是否存在
+  checkIsExist: function(key) {
+    return new Promise(function(resolve, reject) {
+      _client.exists(key, function(err, results) {
+        if(err) {
+          reject({code: 500, err: err});
+        }
+        let flag = true;
+        if(results !== 1) {
+          flag = false;
+        }
+        resolve(flag);
+      })
+    })
+  },
+
   // 设置键值
   setKey: function(key, value, expire) {
     return new Promise(function(resolve, reject) {
@@ -63,7 +79,7 @@ const redisClient = {
     })
   },
 
-  // 获取键值
+  // 获取hash中的单个字段
   hgetKey: function(key, field) {
     return new Promise(function(resolve, reject) {
       _client.hget(key, field, function(err, results) {
@@ -71,6 +87,22 @@ const redisClient = {
           reject({code: 500, err: err});
         }
         resolve(results);
+      })
+    })
+  },
+
+  // 获取hash中的全部字段
+  hgetAllKey: function(key) {
+    return new Promise(function(resolve, reject) {
+      _client.hgetall(key, function(err, results) {
+        if(err) {
+          reject({code: 500, err: err});
+        }
+        let value = results;
+        if(!results) {
+          value = null;
+        }
+        resolve(value);
       })
     })
   },
