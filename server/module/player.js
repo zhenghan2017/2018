@@ -25,6 +25,12 @@ const player = {
     return dbHandler(sql);
   },
 
+  // 根据用户ID获取玩家信息
+  getPlayerInfoByPid: function(pid) {
+    const sql = `select * from model_player where id = ${pid}`;
+    return dbHandler(sql);
+  },
+
   // 创建玩家
   createPlayer: function(playMsg) {
     const userId = playMsg.userId;
