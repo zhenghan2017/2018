@@ -1,8 +1,6 @@
 const net = require('net');
-const Protobuf = require('protobufjs');
+const messageHandler = require('./messageHandler');
 const configProtocolNum = require('../config/configProtocolNum.json');
-const game = Protobuf.loadSync('./config/GameLogicProtocolData.proto');
-const lobby = Protobuf.loadSync('./config/LobbyProtocolData.proto');
 
 
 // 监听ip端口
@@ -24,9 +22,7 @@ const _socketServer = {
       socket.on("data", function(data) {
           let _message = _socketServer.read(data);
           if(_message.protocolNum === configProtocolNum.CMD_LOBBY_REQPLAYERCONNECT) {
-              let CMD_LOBBY_REQPLAYERCONNECT = lobby.lookup('lobbyProtocolDataPackage.DATA_LOBBY_REQPLAYERCONNECT');
-              let _data = CMD_LOBBY_REQPLAYERCONNECT.decode(_message.dataBuf);
-              console.log(_data);
+              messageHandler.respPlayerConnect(_message);
           }
       });
       
