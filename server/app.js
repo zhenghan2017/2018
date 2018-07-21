@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
-const socketServer = require('./app/socket');
+const socketServer = require('./component/socket');
 const player = require('./module/player');
 const redisClient = require('./public/util/redisClient');
 

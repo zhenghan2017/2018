@@ -22,7 +22,14 @@ const _socketServer = {
       socket.on("data", function(data) {
           let _message = _socketServer.read(data);
           if(_message.protocolNum === configProtocolNum.CMD_LOBBY_REQPLAYERCONNECT) {
-              messageHandler.respPlayerConnect(_message);
+              messageHandler.respPlayerConnect(_message)
+                .then(function(reply) {
+                  console.log(reply);
+                })
+                .catch(function(err) {
+                  console.log(err);
+                })
+              // socket.write(respBuffer);
           }
       });
       
